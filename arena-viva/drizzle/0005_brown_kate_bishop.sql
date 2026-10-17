@@ -1,0 +1,1 @@
+ALTER TABLE `blocked_slots` ADD `professionalId` varchar(32) DEFAULT 'amanda' NOT NULL;

@@ -1,0 +1,1 @@
+ALTER TABLE `reservations` ADD `reservedHours` text NOT NULL;

@@ -1,0 +1,55 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1789504886676,
+      "tag": "0000_furry_captain_universe",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1789505102558,
+      "tag": "0001_round_menace",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1789506784691,
+      "tag": "0002_pretty_tag",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1789653471510,
+      "tag": "0003_amusing_viper",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1789685001958,
+      "tag": "0004_lean_sir_ram",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1789832104961,
+      "tag": "0005_brown_kate_bishop",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1790196704622,
+      "tag": "0006_workable_alex_power",
+      "breakpoints": true
+    }
+  ]
+}

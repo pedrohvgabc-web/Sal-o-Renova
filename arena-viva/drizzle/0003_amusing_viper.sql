@@ -1,0 +1,1 @@
+ALTER TABLE `reservations` ADD `professionalId` varchar(32) DEFAULT 'any' NOT NULL;

@@ -1,0 +1,11 @@
+from pathlib import Path
+p=Path('/home/ubuntu/arena-viva/client/src/pages/Management.tsx')
+s=p.read_text()
+s=s.replace('if (accessCode !== "2104")', 'if (accessCode !== "2104" && accessCode !== "0102")')
+s=s.replace('if (accessInput === "2104") { sessionStorage.setItem("renova-management-code", "2104"); setAccessCode("2104"); setAccessError(""); }', 'if (accessInput === "2104" || accessInput === "0102") { sessionStorage.setItem("renova-management-code", accessInput); setAccessCode(accessInput); setAccessError(""); }')
+s=s.replace('const reservations = allReservations.filter(item => item.professionalId === selectedProfessional);', 'const reservations = allReservations.filter(item => isAmanda || item.professionalId === "bianca");')
+s=s.replace('<>{isAmanda && <div className="professional-tabs">', '{isAmanda && <div className="professional-tabs">')
+s=s.replace('</div>}<section className="management-stats">', '</div>}<section className="management-stats">')
+s=s.replace('<small>Agenda do salão</small>', '<small>{isAmanda ? "Amanda · visão geral" : "Bianca · minha agenda"}</small>')
+s=s.replace('<h1>Agenda <span>organizada.</span></h1><p className="management-subtitle">Visualize e organize os atendimentos de Amanda e Bianca.</p>', '<h1>Agenda <span>{isAmanda ? "compartilhada." : "da Bianca."}</span></h1><p className="management-subtitle">{isAmanda ? "Os atendimentos da Bianca aparecem suavizados para não sobrepor sua agenda." : "Você visualiza e gerencia somente os seus atendimentos."}</p>')
+p.write_text(s)

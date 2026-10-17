@@ -1,0 +1,1 @@
+.gradual-blur{position:absolute;left:0;right:0;z-index:5;pointer-events:none;overflow:hidden;isolation:isolate}.gradual-blur-inner{position:relative;width:100%;height:100%}.gradual-blur-inner>div{position:absolute;inset:0;background:rgba(48,37,29,.12);pointer-events:none}@supports not (backdrop-filter:blur(1px)){.gradual-blur-inner>div{background:rgba(48,37,29,.35)}}

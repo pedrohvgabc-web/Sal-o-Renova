@@ -1,0 +1,10 @@
+from pathlib import Path
+p=Path('/home/ubuntu/arena-viva/client/src/pages/Management.tsx')
+s=p.read_text()
+s=s.replace('const [selectedProfessional, setSelectedProfessional] = useState<"amanda" | "bianca">("amanda");', 'const [selectedProfessional, setSelectedProfessional] = useState<"amanda" | "bianca">(() => sessionStorage.getItem("renova-management-code") === "0102" ? "bianca" : "amanda");')
+s=s.replace('const blockedQuery = trpc.management.blocked.useQuery({ ...range, accessCode: "2104" }, { enabled: accessCode === "2104" });', 'const blockedQuery = trpc.management.blocked.useQuery({ ...range, accessCode: accessCode as "2104" | "0102" }, { enabled: accessCode === "2104" || accessCode === "0102" });')
+s=s.replace('type BlockedSlot = { id: number; blockDate: string; startTime: string; reason: string | null };', 'type BlockedSlot = { id: number; blockDate: string; startTime: string; professionalId: "amanda" | "bianca"; reason: string | null };')
+s=s.replace('{isAmanda && blockedForDay(day).map(slot =>', '{blockedForDay(day).map(slot =>')
+s=s.replace('{isAmanda && <button type="button" className="day-block-button"', '<button type="button" className="day-block-button"')
+s=s.replace('onClick={() => openBlockFor(day)}><Plus /> Bloquear horário</button>}</>', 'onClick={() => openBlockFor(day)}><Plus /> Bloquear horário</button></>')
+p.write_text(s)
