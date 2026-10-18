@@ -1,19 +1,23 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { integer, pgEnum, pgTable, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
-export const users = mysqlTable("users", {
-  id: int("id").autoincrement().primaryKey(),
+export const userRoleEnum = pgEnum("user_role", ["user", "admin"]);
+export const paymentStatusEnum = pgEnum("payment_status", ["pending", "paid"]);
+export const reservationStatusEnum = pgEnum("reservation_status", ["confirmed", "cancelled"]);
+
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
   openId: varchar("openId", { length: 64 }).notNull().unique(),
   name: text("name"),
   email: varchar("email", { length: 320 }),
   loginMethod: varchar("loginMethod", { length: 64 }),
-  role: mysqlEnum("role", ["user", "admin"]).default("user").notNull(),
+  role: userRoleEnum("role").default("user").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
 });
 
-export const reservations = mysqlTable("reservations", {
-  id: int("id").autoincrement().primaryKey(),
+export const reservations = pgTable("reservations", {
+  id: serial("id").primaryKey(),
   bookingCode: varchar("bookingCode", { length: 32 }).notNull().unique(),
   customerName: varchar("customerName", { length: 120 }).notNull(),
   whatsapp: varchar("whatsapp", { length: 32 }).notNull(),
@@ -24,13 +28,14 @@ export const reservations = mysqlTable("reservations", {
   resources: text("resources").notNull(),
   professionalId: varchar("professionalId", { length: 32 }).notNull().default("any"),
   extras: text("extras"),
-  amountCents: int("amountCents").notNull(),
-  paymentStatus: mysqlEnum("paymentStatus", ["pending", "paid"]).default("pending").notNull(),
-  status: mysqlEnum("status", ["confirmed", "cancelled"]).default("confirmed").notNull(),
+  amountCents: integer("amountCents").notNull(),
+  paymentStatus: paymentStatusEnum("paymentStatus").default("pending").notNull(),
+  status: reservationStatusEnum("status").default("confirmed").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
-export const blockedSlots = mysqlTable("blocked_slots", {
-  id: int("id").autoincrement().primaryKey(),
+
+export const blockedSlots = pgTable("blocked_slots", {
+  id: serial("id").primaryKey(),
   blockDate: varchar("blockDate", { length: 10 }).notNull(),
   startTime: varchar("startTime", { length: 5 }).notNull(),
   professionalId: varchar("professionalId", { length: 32 }).notNull().default("amanda"),
@@ -38,13 +43,21 @@ export const blockedSlots = mysqlTable("blocked_slots", {
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
-export const pushSubscriptions = mysqlTable("push_subscriptions", {
-  id: int("id").autoincrement().primaryKey(),
+export const pushSubscriptions = pgTable("push_subscriptions", {
+  id: serial("id").primaryKey(),
   endpoint: varchar("endpoint", { length: 500 }).notNull().unique(),
   p256dh: varchar("p256dh", { length: 255 }).notNull(),
   auth: varchar("auth", { length: 255 }).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export const feedbacks = pgTable("feedbacks", {
+  id: serial("id").primaryKey(),
+  customerName: varchar("customerName", { length: 120 }).notNull(),
+  rating: integer("rating").notNull(),
+  message: text("message").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
 export type User = typeof users.$inferSelect;
@@ -55,6 +68,8 @@ export type BlockedSlot = typeof blockedSlots.$inferSelect;
 export type InsertBlockedSlot = typeof blockedSlots.$inferInsert;
 export type PushSubscription = typeof pushSubscriptions.$inferSelect;
 export type InsertPushSubscription = typeof pushSubscriptions.$inferInsert;
+export type Feedback = typeof feedbacks.$inferSelect;
+export type InsertFeedback = typeof feedbacks.$inferInsert;
 
 export const serviceCatalog = [
   { id: "loiros", category: "Cabelo", name: "Loiros", duration: 180, priceCents: 25000, description: "Venha clarear seu dia." },

@@ -915,6 +915,8 @@ export default function InfiniteMenu({ items = [], scale = 1.0, backgroundColor 
   const canvasRef = useRef(null);
   const [activeItem, setActiveItem] = useState(null);
   const [isMoving, setIsMoving] = useState(false);
+  const [webglAvailable, setWebglAvailable] = useState(true);
+  const displayItems = items.length ? items : defaultItems;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -926,14 +928,19 @@ export default function InfiniteMenu({ items = [], scale = 1.0, backgroundColor 
     };
 
     if (canvas) {
-      sketch = new InfiniteGridMenu(
-        canvas,
-        items.length ? items : defaultItems,
-        handleActiveItem,
-        setIsMoving,
-        sk => sk.run(),
-        scale
-      );
+      try {
+        sketch = new InfiniteGridMenu(
+          canvas,
+          displayItems,
+          handleActiveItem,
+          setIsMoving,
+          sk => sk.run(),
+          scale
+        );
+        setWebglAvailable(true);
+      } catch {
+        setWebglAvailable(false);
+      }
     }
 
     const handleResize = () => {
@@ -948,7 +955,7 @@ export default function InfiniteMenu({ items = [], scale = 1.0, backgroundColor 
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [items, scale]);
+  }, [displayItems, scale]);
 
   const handleButtonClick = () => {
     if (!activeItem?.link) return;
@@ -969,7 +976,7 @@ export default function InfiniteMenu({ items = [], scale = 1.0, backgroundColor 
         '--infinite-menu-background': backgroundColor
       }}
     >
-      <canvas id="infinite-grid-menu-canvas" ref={canvasRef} />
+      {webglAvailable ? <canvas id="infinite-grid-menu-canvas" ref={canvasRef} /> : <div className="infinite-menu-fallback" aria-label="Inspirações do Renova">{displayItems.map(item => <a key={item.title} href={item.link} target="_blank" rel="noreferrer"><img src={item.image} alt="" /><span>{item.title}</span></a>)}</div>}
 
       {activeItem && (
         <>
@@ -985,4 +992,3 @@ export default function InfiniteMenu({ items = [], scale = 1.0, backgroundColor 
     </div>
   );
 }
-

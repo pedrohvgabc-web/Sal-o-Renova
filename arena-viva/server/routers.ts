@@ -3,7 +3,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
-import { cancelReservation, createBlockedSlot, createManualReservation, createReservation, deleteBlockedSlot, deleteReservationById, findConflictingReservations, getBlockedSlotsForDate, getBlockedSlotsForRange, getReservationsByWhatsapp, getReservationsForDate, getReservationsForRange, savePushSubscription } from "./db";
+import { cancelReservation, createBlockedSlot, createFeedback, createManualReservation, createReservation, deleteBlockedSlot, deleteFeedback, deleteReservationById, findConflictingReservations, getBlockedSlotsForDate, getBlockedSlotsForRange, getFeedbacks, getReservationsByWhatsapp, getReservationsForDate, getReservationsForRange, savePushSubscription } from "./db";
 import { PUSH_PUBLIC_KEY, sendPushToAll } from "./push";
 
 const serviceIds = ["selagem-organica", "coloracao", "argiloterapia-capilar", "coloracao-mechas", "loiro", "loiro-iluminado", "moreno-iluminado", "hidratacao-escova", "loiros", "moreno", "selagem", "argiloterapia", "cronograma"] as const;
@@ -29,6 +29,11 @@ const managementInput = z.object({
   startTime: z.string().regex(/^([0-1]\d|2[0-3]):(00|30)$/),
   serviceId: z.enum(serviceIds),
   professionalId: z.enum(["amanda", "bianca"]).default("amanda"),
+});
+const feedbackInput = z.object({
+  customerName: z.string().trim().min(2).max(120),
+  rating: z.number().int().min(1).max(5),
+  message: z.string().trim().min(10).max(1000),
 });
 const allowedHoursForDate = (dateValue: string) => {
   const day = new Date(`${dateValue}T12:00:00`).getDay();
@@ -65,6 +70,11 @@ export const appRouter = router({
   push: router({
     publicKey: publicProcedure.query(() => ({ publicKey: PUSH_PUBLIC_KEY })),
     subscribe: publicProcedure.input(z.object({ endpoint: z.string().url().max(500), keys: z.object({ p256dh: z.string().min(16).max(255), auth: z.string().min(8).max(255) }) })).mutation(async ({ input }) => { await savePushSubscription({ endpoint: input.endpoint, p256dh: input.keys.p256dh, auth: input.keys.auth }); return { success: true } as const; }),
+  }),
+  feedbacks: router({
+    create: publicProcedure.input(feedbackInput).mutation(({ input }) => createFeedback(input)),
+    list: publicProcedure.input(z.object({ accessCode: managementCode })).query(() => getFeedbacks()),
+    delete: publicProcedure.input(z.object({ accessCode: managementCode, id: z.number().int().positive() })).mutation(({ input }) => deleteFeedback(input.id)),
   }),
   management: router({
     week: publicProcedure.input(z.object({ accessCode: managementCode, startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), endDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/) })).query(({ input }) => getReservationsForRange(input.startDate, input.endDate, input.accessCode === "2104" ? undefined : "bianca")),
