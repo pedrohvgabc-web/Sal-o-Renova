@@ -1131,3 +1131,146 @@ body {
     font-size: 1rem;
   }
 }
+
+
+/* ---- Fluidez Apple-inspired: resposta imediata, material e consistência espacial ---- */
+:where(button, a, input, textarea, select) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where(button, a) {
+  transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+:where(button, a):active {
+  transform: scale(0.975);
+  transition-duration: 90ms;
+}
+
+:where(button, a):focus-visible,
+:where(input, textarea, select):focus-visible {
+  outline: 2px solid var(--rose-pastel);
+  outline-offset: 3px;
+}
+
+.gold-button:active,
+.management-primary:active,
+.service-summary-confirm:active {
+  transform: scale(0.965) !important;
+}
+
+/* O cabeçalho é um material, não uma faixa opaca: conteúdo passa por baixo com profundidade. */
+.renova-header,
+.management-header {
+  box-shadow: 0 10px 32px rgba(37, 20, 27, 0.18);
+  border-bottom-color: rgba(244, 199, 211, 0.16);
+}
+
+.renova-header::after,
+.management-header::after {
+  position: absolute;
+  right: 0;
+  bottom: -18px;
+  left: 0;
+  height: 18px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(31, 18, 23, 0.12), transparent);
+  opacity: 0.5;
+}
+
+/* Menu e folha do agendamento entram pela origem e podem ser revertidos sem um salto visual. */
+@media (max-width: 800px) {
+  .mobile-nav {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.985);
+    transform-origin: top right;
+    pointer-events: none;
+    transition: opacity 180ms cubic-bezier(0.23, 1, 0.32, 1), transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .mobile-nav.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  .mobile-menu-backdrop {
+    animation: backdrop-in 180ms ease-out both;
+  }
+}
+
+@keyframes backdrop-in {
+  from { opacity: 0; backdrop-filter: blur(0); }
+  to { opacity: 1; backdrop-filter: blur(3px); }
+}
+
+.booking-drawer {
+  border-color: rgba(244, 199, 211, 0.24);
+  background: rgba(45, 29, 35, 0.96);
+  box-shadow: 0 -22px 60px rgba(36, 18, 25, 0.3);
+  backdrop-filter: blur(22px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+}
+
+.booking-drawer input:focus-visible,
+.feedback-form input:focus-visible,
+.feedback-form textarea:focus-visible,
+.management-access-input:focus-visible {
+  border-color: var(--rose-deep);
+  box-shadow: 0 0 0 3px rgba(244, 199, 211, 0.18);
+}
+
+.service-selection-toast,
+.booking-drawer {
+  will-change: transform, opacity;
+}
+
+/* Superfícies mais calmas quando a pessoa pede menos transparência ou mais contraste. */
+@media (prefers-reduced-transparency: reduce) {
+  .renova-header,
+  .management-header,
+  .booking-drawer,
+  .mobile-nav.open {
+    background: #2d1d23;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .renova-header,
+  .management-header,
+  .booking-drawer,
+  .service-selection-toast {
+    border-color: var(--rose-pastel);
+  }
+
+  .hero-photo-overlay {
+    background: linear-gradient(90deg, rgba(28, 16, 21, 0.96), rgba(45, 23, 31, 0.82) 62%, rgba(45, 23, 31, 0.28));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(button, a) {
+    transition-duration: 120ms;
+  }
+
+  :where(button, a):active {
+    transform: none;
+  }
+
+  .mobile-nav,
+  .mobile-nav.open,
+  .mobile-menu-backdrop {
+    animation: none !important;
+    transition: opacity 120ms ease !important;
+    transform: none !important;
+  }
+
+  .hero-photo {
+    filter: saturate(0.94) brightness(0.78) contrast(1.06);
+  }
+}
