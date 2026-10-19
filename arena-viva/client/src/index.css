@@ -1449,3 +1449,53 @@ body {
     transform: none;
   }
 }
+
+
+/* Ajuste fino: a composição fica mais limpa sem a moldura geométrica sobre a foto. */
+.hero-frame {
+  display: none;
+}
+
+.renova-hero::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  z-index: 14;
+  height: 120px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 0%, rgba(39, 28, 32, 0.38) 72%, #271c20 100%);
+}
+
+/* A descida do hero para o conteúdo mantém a sensação de material contínuo. */
+.renova-page > main > section {
+  scroll-margin-top: 88px;
+}
+
+.section {
+  position: relative;
+}
+
+.section::before {
+  position: absolute;
+  top: 0;
+  right: 8%;
+  left: 8%;
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(244, 199, 211, 0.1), transparent);
+  opacity: 0.7;
+}
+
+@media (max-width: 800px) {
+  .renova-hero::after {
+    height: 90px;
+  }
+
+  .section::before {
+    right: 12%;
+    left: 12%;
+  }
+}
