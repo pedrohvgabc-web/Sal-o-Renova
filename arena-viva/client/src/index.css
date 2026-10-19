@@ -746,3 +746,258 @@ body { margin: 0; min-width: 320px; background: var(--paper); }
 .management-view-tabs{display:flex;gap:6px;width:max-content;max-width:100%;margin:0 0 22px;padding:5px;border:1px solid rgba(244,181,196,.12);border-radius:14px;background:#261e21}.management-view-tabs button{display:inline-flex;align-items:center;gap:7px;border:0;border-radius:10px;background:transparent;color:#a9989e;padding:10px 16px;font-size:12px;font-weight:600;cursor:pointer}.management-view-tabs button:hover,.management-view-tabs button:focus-visible{color:#f8e7eb;outline:none}.management-view-tabs button.active{background:#e9a6bb;color:#281d20}.management-view-tabs button span{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:99px;background:rgba(255,255,255,.16);font-size:10px}.management-view-tabs button.active span{background:rgba(40,29,32,.14)}.management-panel-hidden{display:none!important}.feedback-management-panel{padding:28px;border:1px solid rgba(244,181,196,.12);border-radius:22px;background:#261e21}.feedback-management-header{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:26px}.feedback-management-header h2{margin:0;font:clamp(32px,5vw,48px)/.98 Georgia,serif;letter-spacing:-.05em}.feedback-management-header h2 span{color:#e9a6bb;font-style:italic}.feedback-management-header>div:first-child>p:last-child{margin:12px 0 0;color:#a9959b;font-size:13px;line-height:1.55}.feedback-management-total{display:flex;align-items:center;gap:12px;padding:13px 16px;border:1px solid rgba(244,181,196,.14);border-radius:15px;background:#302529}.feedback-management-total strong{font:32px/1 Georgia,serif;color:#f5cbd7}.feedback-management-total span{color:#a9959b;font-size:10px;line-height:1.35;text-transform:uppercase;letter-spacing:.08em}.feedback-admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.feedback-admin-card{display:flex;flex-direction:column;gap:14px;min-height:180px;padding:18px;border:1px solid rgba(244,181,196,.12);border-radius:17px;background:#302529}.feedback-admin-card-top,.feedback-admin-card-footer{display:flex;align-items:center;justify-content:space-between;gap:12px}.feedback-admin-stars{display:flex;gap:3px;color:#66585e}.feedback-admin-stars svg{width:15px;height:15px}.feedback-admin-stars svg.filled{color:#efabc0;fill:currentColor}.feedback-admin-card time{color:#96858b;font-size:10px;text-transform:capitalize}.feedback-admin-card>p{flex:1;margin:0;color:#f0e1e5;font:italic 17px/1.45 Georgia,serif}.feedback-admin-card-footer{padding-top:12px;border-top:1px solid rgba(244,181,196,.1)}.feedback-admin-card-footer strong{color:#d9bbc4;font-size:12px}.feedback-admin-card-footer button{display:inline-flex;align-items:center;gap:5px;border:0;background:transparent;color:#a98f98;font-size:10px;cursor:pointer}.feedback-admin-card-footer button:hover{color:#f09ab1}.feedback-admin-card-footer svg{width:13px}.feedback-admin-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:220px;border:1px dashed rgba(244,181,196,.16);border-radius:16px;color:#96858b;text-align:center;font-size:12px}.feedback-admin-empty svg{width:25px;color:#e9a6bb}.feedback-admin-empty strong{color:#e7d4da;font-size:14px}
 @media(max-width:800px){.feedback-header-link{width:88px;padding:5px 3px;font-size:9px;white-space:normal;text-align:left}.feedback-layout{grid-template-columns:1fr;gap:28px}.feedback-intro{padding-top:0}.feedback-form-grid{grid-template-columns:1fr}.feedback-form-footer{align-items:flex-start;flex-direction:column}.feedback-form-footer .gold-button{width:100%}.feedback-management-panel{padding:20px 14px}.feedback-management-header{align-items:stretch;flex-direction:column}.feedback-management-total{width:max-content}.feedback-admin-grid{grid-template-columns:1fr}.management-view-tabs{width:100%}.management-view-tabs button{flex:1;justify-content:center}}
 @media(max-width:420px){.feedback-header-link{width:74px;font-size:8px}.feedback-form{padding:18px 15px}.feedback-management-header h2{font-size:35px}.feedback-admin-card>p{font-size:15px}}
+
+
+/* ---- Renova Rosé Pastel: direção visual refinada ---- */
+:root {
+  --rose-pastel: #f4c7d3;
+  --rose-pastel-soft: #f9e3e8;
+  --rose-pastel-wash: rgba(244, 199, 211, 0.14);
+  --rose-deep: #c87892;
+  --brown-pastel: #795b55;
+  --brown-soft: #a47d76;
+  --brown-ink: #5a403d;
+  --warm-white: #fff8f7;
+}
+
+body {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(244, 199, 211, 0.16), transparent 28rem),
+    radial-gradient(circle at 88% 42%, rgba(216, 141, 167, 0.08), transparent 30rem),
+    var(--paper);
+}
+
+/* Os CTAs principais agora usam marrom pastel no texto, em vez de branco/dourado. */
+.gold-button,
+.management-primary,
+.service-summary-confirm {
+  color: var(--brown-ink) !important;
+  background: linear-gradient(135deg, #f8dce3 0%, var(--rose-pastel) 54%, #e9a7ba 100%);
+  border-color: rgba(121, 91, 85, 0.16) !important;
+  text-shadow: none;
+}
+
+.gold-button:hover,
+.management-primary:hover,
+.service-summary-confirm:hover:not(:disabled) {
+  color: #583b38 !important;
+  background: linear-gradient(135deg, #fbe7eb 0%, #f3bdcc 52%, #df91aa 100%);
+}
+
+/* A navegação e os controles secundários ganham o mesmo acabamento, sem perder contraste. */
+.renova-header {
+  background: rgba(48, 28, 34, 0.9);
+  border-bottom-color: rgba(244, 199, 211, 0.22);
+}
+
+.nav-inner > button,
+.mobile-nav > button,
+.mobile-lookup-button,
+.menu-toggle {
+  color: var(--rose-pastel) !important;
+}
+
+.nav-inner > button:hover,
+.mobile-nav > button:hover,
+.mobile-lookup-button:hover,
+.menu-toggle:hover {
+  color: var(--warm-white) !important;
+  background: rgba(244, 199, 211, 0.14);
+}
+
+.eyebrow,
+.chosen-count,
+.time-heading strong,
+.section-heading .eyebrow {
+  color: var(--rose-deep) !important;
+}
+
+/* Rosa em pequenas superfícies cria continuidade entre hero, agenda e rodapé. */
+.booking-section,
+.feedback-section,
+.contact-section,
+.policy-section {
+  background:
+    linear-gradient(180deg, rgba(244, 199, 211, 0.075), transparent 34%),
+    #251f21;
+}
+
+.booking-panel,
+.feedback-form,
+.service-card,
+.portfolio-grid figure {
+  border-color: rgba(244, 199, 211, 0.16);
+}
+
+.booking-panel:focus-within,
+.feedback-form:focus-within {
+  border-color: rgba(244, 199, 211, 0.34);
+  box-shadow: 0 18px 50px rgba(200, 120, 146, 0.08);
+}
+
+.service-card:hover,
+.portfolio-grid figure:hover {
+  border-color: rgba(244, 199, 211, 0.55);
+}
+
+.service-mini-list button[aria-pressed="true"],
+.service-mini-list button.selected,
+.service-mini-list button:focus-visible {
+  border-color: var(--rose-pastel) !important;
+  box-shadow: 0 0 0 3px rgba(244, 199, 211, 0.14);
+}
+
+.service-mini-list button b,
+.service-summary-main strong,
+.booking-summary-final strong {
+  color: var(--rose-pastel) !important;
+}
+
+.service-mini-list button span,
+.service-summary-main span,
+.service-summary-detail span,
+.booking-summary-final span {
+  color: #d9aaa9 !important;
+}
+
+/* Campos claros recebem texto marrom pastel legível e placeholders mais quentes. */
+.feedback-form input,
+.feedback-form textarea,
+.booking-drawer input,
+.management-access-input,
+.management-form input,
+.management-form textarea {
+  color: var(--brown-ink);
+  caret-color: var(--rose-deep);
+  border-color: rgba(121, 91, 85, 0.22);
+  background: rgba(255, 248, 247, 0.96);
+}
+
+.feedback-form input::placeholder,
+.feedback-form textarea::placeholder,
+.booking-drawer input::placeholder,
+.management-access-input::placeholder {
+  color: #ad8c87;
+}
+
+.feedback-form label,
+.feedback-rating-field > span,
+.drawer-fields label,
+.booking-summary-final small {
+  color: var(--brown-soft);
+}
+
+.feedback-rating button {
+  color: var(--brown-soft);
+}
+
+.feedback-rating button.selected,
+.feedback-rating button:hover {
+  color: var(--rose-deep);
+}
+
+.feedback-form-footer small,
+.feedback-intro > p:last-child,
+.booking-panel > p {
+  color: #b99595;
+}
+
+.service-selection-toast {
+  border-color: rgba(244, 199, 211, 0.32) !important;
+  background: linear-gradient(135deg, rgba(58, 36, 42, 0.98), rgba(45, 30, 34, 0.98)) !important;
+  box-shadow: 0 18px 55px rgba(70, 35, 46, 0.35), 0 0 0 1px rgba(244, 199, 211, 0.06);
+}
+
+.service-selection-toast > svg,
+.service-summary-detail svg {
+  color: var(--rose-pastel) !important;
+}
+
+.service-summary-content small,
+.service-summary-detail {
+  color: #cfa5a4 !important;
+}
+
+.service-summary-confirm {
+  min-height: 44px;
+}
+
+.renova-footer {
+  background: linear-gradient(180deg, #2f2024 0%, #24191c 100%);
+  border-top-color: rgba(244, 199, 211, 0.16);
+}
+
+.footer-grid b,
+.footer-grid a:hover,
+.footer-grid .whatsapp-link {
+  color: var(--rose-pastel) !important;
+}
+
+.footer-grid span,
+.footer-grid a,
+.footer-grid button,
+.footer-bottom {
+  color: #d6b6b3 !important;
+}
+
+.footer-grid .whatsapp-link {
+  border-color: rgba(244, 199, 211, 0.34);
+  background: rgba(244, 199, 211, 0.12);
+}
+
+/* Gestão: mesma assinatura cromática, com hierarquia mais suave nos textos. */
+.management-page {
+  background:
+    radial-gradient(circle at 90% 0%, rgba(244, 199, 211, 0.1), transparent 30rem),
+    #1d1719;
+}
+
+.management-title-row h1 span,
+.management-brand strong span,
+.management-form h2 span {
+  color: var(--rose-pastel) !important;
+}
+
+.management-kicker,
+.today-button,
+.appointment-time,
+.appointment-professional,
+.day-block-button:hover,
+.blocked-card button,
+.management-home:hover,
+.management-logout:hover {
+  color: var(--rose-pastel) !important;
+}
+
+.management-header,
+.professional-tabs,
+.management-stats > div,
+.week-toolbar,
+.day-column,
+.management-form,
+.feedback-management-panel {
+  border-color: rgba(244, 199, 211, 0.15);
+}
+
+.professional-tabs button.active,
+.management-view-tabs button.active {
+  color: var(--brown-ink) !important;
+  background: var(--rose-pastel) !important;
+}
+
+.management-primary,
+.management-login-card button {
+  color: var(--brown-ink) !important;
+}
+
+@media (max-width: 800px) {
+  .service-selection-toast {
+    border-radius: 18px 18px 0 0 !important;
+  }
+
+  .gold-button,
+  .management-primary,
+  .service-summary-confirm {
+    color: var(--brown-ink) !important;
+  }
+}
