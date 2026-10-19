@@ -1001,3 +1001,49 @@ body {
     color: var(--brown-ink) !important;
   }
 }
+
+
+/* Hero rosé: tratamento de cor sobre a foto original, preservando nitidez e detalhes do salão. */
+.renova-hero {
+  isolation: isolate;
+  background: #3a252d;
+}
+
+.hero-photo-layer {
+  background: #d49aaa;
+}
+
+.hero-photo {
+  filter: saturate(0.82) sepia(0.08) brightness(0.84) contrast(1.05);
+  object-position: center 42%;
+  mix-blend-mode: soft-light;
+  opacity: 0.92;
+}
+
+.hero-photo-overlay {
+  background:
+    linear-gradient(90deg, rgba(43, 26, 32, 0.94) 0%, rgba(74, 39, 49, 0.78) 34%, rgba(174, 102, 124, 0.35) 68%, rgba(244, 199, 211, 0.2) 100%),
+    linear-gradient(180deg, rgba(244, 199, 211, 0.18), rgba(79, 39, 51, 0.12) 52%, rgba(35, 22, 27, 0.42));
+}
+
+.renova-hero .display,
+.renova-hero .hero-copy p {
+  text-shadow: 0 3px 24px rgba(36, 19, 25, 0.36);
+}
+
+.renova-hero .hero-note {
+  color: #f4d8de;
+}
+
+@media (max-width: 800px) {
+  .hero-photo {
+    object-position: 56% 38%;
+    filter: saturate(0.78) sepia(0.1) brightness(0.78) contrast(1.06);
+  }
+
+  .hero-photo-overlay {
+    background:
+      linear-gradient(90deg, rgba(43, 26, 32, 0.88) 0%, rgba(74, 39, 49, 0.58) 58%, rgba(174, 102, 124, 0.24) 100%),
+      linear-gradient(180deg, rgba(244, 199, 211, 0.16), rgba(35, 22, 27, 0.54));
+  }
+}

@@ -113,12 +113,12 @@ export default function Home() {
   return <><div className={`splash-screen ${showSplash ? "" : "splash-screen-hidden"}`} aria-hidden={!showSplash}><img src={logoUrl} alt="Renova Salão de Beleza" /></div><div className="renova-page"><header className="renova-header"><div className="container nav-inner">{menuOpen && <button className="mobile-menu-backdrop" onClick={() => setMenuOpen(false)} aria-label="Fechar menu" />}<button onClick={() => scrollTo("top")} className="logo-button" aria-label="Ir para o início"><img src="/assets/renova-logo_fb46241f.png" alt="Renova Salão de Beleza" /></button><button type="button" className="feedback-header-link" onClick={() => scrollTo("feedback")}>Nos dê um feedback</button><nav className={menuOpen ? "mobile-nav open" : "mobile-nav"}><button onClick={() => scrollTo("about")}>O Renova</button><button onClick={() => scrollTo("services")}>Serviços</button><button onClick={() => scrollTo("portfolio")}>Portfólio</button><button onClick={() => scrollTo("booking")}>Agendar</button><button onClick={() => setShowLookup(true)}>Meus agendamentos</button><button onClick={() => { setShowManagementGate(true); setMenuOpen(false); }}>Gestão</button><button className="push-menu-button" onClick={enablePush} disabled={pushStatus === "loading" || pushStatus === "enabled"}><Bell /> {pushStatus === "loading" ? "Ativando..." : pushStatus === "enabled" ? "Novidades ativadas" : "Quer receber as novidades da Renova?"}</button></nav><Button onClick={() => setShowLookup(true)} className="gold-button hidden sm:flex">Meus agendamentos</Button><Button onClick={() => scrollTo("booking")} className="gold-button hidden lg:flex">Agendar horário <ChevronRight className="ml-1 h-4 w-4" /></Button><button className="mobile-lookup-button md:hidden" onClick={() => setShowLookup(true)} aria-label="Consultar meus agendamentos">Meus horários</button><button className="menu-toggle md:hidden" onClick={() => setMenuOpen(value => !value)} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen}>{menuOpen ? <X /> : <Menu />}</button></div></header>
     <main id="top">
       <section className="renova-hero relative min-h-[90vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#20191b] via-[#20191b]/90 to-transparent z-10" />
+        <div className="hero-photo-layer absolute inset-0 z-0">
+          <div className="hero-photo-overlay absolute inset-0 z-10" />
           <img
             src="/assets/pasted_file_JKHecX_WhatsAppImage2026-09-23at11.56.26_89e07897.jpeg"
             alt=""
-            className="w-full h-full object-cover object-center"
+            className="hero-photo w-full h-full object-cover object-center"
           />
         </div>
 
