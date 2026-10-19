@@ -1047,3 +1047,87 @@ body {
       linear-gradient(180deg, rgba(244, 199, 211, 0.16), rgba(35, 22, 27, 0.54));
   }
 }
+
+
+/* Direção de arte do hero: a foto é o ponto de destaque; a cor apenas a enquadra. */
+.renova-hero {
+  background: #3a252d;
+}
+
+.hero-photo {
+  filter: saturate(0.94) brightness(0.78) contrast(1.06);
+  mix-blend-mode: normal;
+  opacity: 1;
+  object-position: center center;
+}
+
+.hero-photo-overlay {
+  background:
+    linear-gradient(90deg, rgba(41, 25, 30, 0.9) 0%, rgba(62, 34, 42, 0.66) 31%, rgba(91, 46, 58, 0.25) 58%, rgba(91, 46, 58, 0.04) 100%),
+    linear-gradient(180deg, rgba(244, 199, 211, 0.08) 0%, transparent 48%, rgba(38, 23, 29, 0.26) 100%);
+}
+
+.renova-hero .container {
+  max-width: 1200px;
+}
+
+.renova-hero .display {
+  max-width: 720px;
+  color: #fff8f7;
+  text-shadow: 0 4px 26px rgba(38, 20, 26, 0.42);
+}
+
+.renova-hero .display em {
+  color: #f4c7d3 !important;
+  font-style: normal;
+  text-shadow: 0 3px 22px rgba(85, 37, 53, 0.42);
+}
+
+.renova-hero .hero-copy {
+  max-width: 560px;
+  color: #f3dfe2 !important;
+  font-size: clamp(1rem, 1.6vw, 1.22rem);
+  line-height: 1.65;
+}
+
+.renova-hero .eyebrow {
+  color: #f4c7d3 !important;
+  letter-spacing: 0.1em;
+}
+
+.renova-hero .hero-actions {
+  gap: 18px;
+}
+
+.renova-hero .hero-actions > button:last-child {
+  color: #f9e6e9 !important;
+  border-bottom: 1px solid rgba(244, 199, 211, 0.45);
+  padding-bottom: 5px;
+}
+
+.renova-hero .hero-actions > button:last-child:hover {
+  color: #f4c7d3 !important;
+  border-bottom-color: #f4c7d3;
+}
+
+@media (max-width: 800px) {
+  .hero-photo {
+    object-position: 57% center;
+    filter: saturate(0.92) brightness(0.7) contrast(1.08);
+  }
+
+  .hero-photo-overlay {
+    background:
+      linear-gradient(90deg, rgba(41, 25, 30, 0.88) 0%, rgba(62, 34, 42, 0.62) 48%, rgba(91, 46, 58, 0.2) 100%),
+      linear-gradient(180deg, rgba(244, 199, 211, 0.08), rgba(38, 23, 29, 0.42));
+  }
+
+  .renova-hero .display {
+    max-width: 360px;
+  }
+
+  .renova-hero .hero-copy {
+    max-width: 340px;
+    font-size: 1rem;
+  }
+}
