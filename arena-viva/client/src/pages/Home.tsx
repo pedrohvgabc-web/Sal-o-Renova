@@ -14,11 +14,11 @@ import { CalendarDays, Check, ChevronLeft, ChevronRight, Clock3, Crown, Heart, I
 
 const SERVICES = [
   { id: "corte", category: "Cabelo", name: "Corte", duration: 60, price: 50, description: "Um corte pensado para acompanhar seu estilo.", image: "/assets/servico-004_5c082af4.png" },
-  { id: "cronograma-capilar", category: "Tratamentos", name: "Cronograma capilar", duration: 90, price: 387, description: "Hidratação, nutrição e reconstrução.", image: "/assets/servico-002_ce4aa40e.png" },
+  { id: "cronograma-capilar", category: "Tratamentos", name: "Cronograma capilar", duration: 90, price: 387, description: "Hidratação, nutrição e reconstrução.", image: "/assets/cronograma-capilar-pdf.jpg" },
   { id: "hidratacao-escova", category: "Tratamentos", name: "Hidratação + escova", duration: 90, price: 75, originalPrice: 100, description: "Cuidado, maciez e finalização com condição promocional.", image: "/assets/servico-002_62214ed8.jpg" },
   { id: "coloracao", category: "Coloração", name: "Coloração", duration: 150, price: 120, description: "Uma nova cor para valorizar sua beleza.", image: "/assets/servico-001_9546a145.jpg" },
   { id: "moreno-iluminado", category: "Cabelo", name: "Moreno iluminado", duration: 240, price: 350, description: "Luz e profundidade para um resultado natural.", image: "/assets/servico-001_bda3d642.png" },
-  { id: "loiro-iluminado", category: "Cabelo", name: "Loiro iluminado", duration: 240, price: 420, description: "Iluminação delicada e radiante.", image: "/assets/servico-000_71705be8.png" },
+  { id: "loiro-iluminado", category: "Cabelo", name: "Loiro iluminado", duration: 240, price: 420, description: "Iluminação delicada e radiante.", image: "/assets/loiro-iluminado-depois-pdf.jpg" },
   { id: "argiloterapia-capilar", category: "Tratamentos", name: "Argiloterapia", duration: 60, price: 120, description: "Cuidado profundo para couro cabeludo e fios.", image: "/assets/servico-002_62214ed8.jpg" },
   { id: "loiro", category: "Cabelo", name: "Loiro", duration: 240, price: 450, description: "Clareamento pensado para iluminar seu visual.", image: "/assets/servico-004_5c082af4.png" },
   { id: "botox-capilar", category: "Tratamentos", name: "Botox capilar", duration: 150, price: 0, description: "Tratamento disponível com Bianca.", image: "/assets/servico-003_93fc31da.jpg" },
@@ -122,7 +122,7 @@ export default function Home() {
         <div className="hero-photo-layer absolute inset-0 z-0">
           <div className="hero-photo-overlay absolute inset-0 z-10" />
           <img
-            src="/assets/pasted_file_JKHecX_WhatsAppImage2026-09-23at11.56.26_89e07897.jpeg"
+            src="/assets/hero-renova-pdf.jpg"
             alt=""
             className="hero-photo w-full h-full object-cover object-center"
           />

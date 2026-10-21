@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const RESULTS = [
-  { label: "Loiro iluminado", before: "/assets/resultado-001_072db1a1.jpg", after: "/assets/resultado-000_2c1f01e4.jpg" },
+  { label: "Loiro iluminado", before: "/assets/loiro-iluminado-antes-pdf.jpg", after: "/assets/loiro-iluminado-depois-pdf.jpg" },
   { label: "Transformação e alinhamento", before: "/assets/resultado-003_7c75b231.jpg", after: "/assets/resultado-002_bbf5153b.jpg" },
   { label: "Loiro com acabamento", before: "/assets/resultado-005_92c8d6b4.jpg", after: "/assets/resultado-004_b2842d5a.jpg" },
 ] as const;
