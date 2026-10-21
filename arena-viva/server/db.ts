@@ -1,7 +1,7 @@
 import { and, asc, desc, eq, gte, lte, ne } from "drizzle-orm";
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
-import { InsertUser, blockedSlots, feedbacks, pushSubscriptions, reservations, users } from "../drizzle/schema";
+import { InsertUser, blockedSlots, feedbacks, pushSubscriptions, releasedSlots, reservations, users } from "../drizzle/schema";
 import { ENV } from "./_core/env";
 
 let _client: ReturnType<typeof postgres> | null = null;
@@ -172,6 +172,49 @@ export async function deleteBlockedSlot(id: number, professionalId?: string) {
   const filters = [eq(blockedSlots.id, id)];
   if (professionalId) filters.push(eq(blockedSlots.professionalId, professionalId));
   await db.delete(blockedSlots).where(and(...filters));
+  return { success: true } as const;
+}
+
+export async function getReleasedSlotsForDate(releaseDate: string, professionalId?: string) {
+  const db = await getDb();
+  if (!db) return [];
+  try {
+    const filters = [eq(releasedSlots.releaseDate, releaseDate)];
+    if (professionalId) filters.push(eq(releasedSlots.professionalId, professionalId));
+    return await db.select().from(releasedSlots).where(and(...filters)).orderBy(asc(releasedSlots.startTime));
+  } catch {
+    return [];
+  }
+}
+
+export async function getReleasedSlotsForRange(startDate: string, endDate: string, professionalId?: string) {
+  const db = await getDb();
+  if (!db) return [];
+  try {
+    const filters = [gte(releasedSlots.releaseDate, startDate), lte(releasedSlots.releaseDate, endDate)];
+    if (professionalId) filters.push(eq(releasedSlots.professionalId, professionalId));
+    return await db.select().from(releasedSlots).where(and(...filters)).orderBy(asc(releasedSlots.releaseDate), asc(releasedSlots.startTime));
+  } catch {
+    return [];
+  }
+}
+
+export async function createReleasedSlot(input: { releaseDate: string; startTime: string; professionalId: string }) {
+  const db = await getDb();
+  if (!db) throw new Error("Banco de dados indisponível");
+  const existing = await db.select().from(releasedSlots).where(and(eq(releasedSlots.releaseDate, input.releaseDate), eq(releasedSlots.startTime, input.startTime), eq(releasedSlots.professionalId, input.professionalId))).limit(1);
+  if (existing[0]) return existing[0];
+  await db.insert(releasedSlots).values(input);
+  const created = await db.select().from(releasedSlots).where(and(eq(releasedSlots.releaseDate, input.releaseDate), eq(releasedSlots.startTime, input.startTime), eq(releasedSlots.professionalId, input.professionalId))).orderBy(desc(releasedSlots.id)).limit(1);
+  return created[0];
+}
+
+export async function deleteReleasedSlot(id: number, professionalId?: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Banco de dados indisponível");
+  const filters = [eq(releasedSlots.id, id)];
+  if (professionalId) filters.push(eq(releasedSlots.professionalId, professionalId));
+  await db.delete(releasedSlots).where(and(...filters));
   return { success: true } as const;
 }
 

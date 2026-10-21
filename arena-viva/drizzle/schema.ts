@@ -43,6 +43,14 @@ export const blockedSlots = pgTable("blocked_slots", {
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
+export const releasedSlots = pgTable("released_slots", {
+  id: serial("id").primaryKey(),
+  releaseDate: varchar("releaseDate", { length: 10 }).notNull(),
+  startTime: varchar("startTime", { length: 5 }).notNull(),
+  professionalId: varchar("professionalId", { length: 32 }).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
 export const pushSubscriptions = pgTable("push_subscriptions", {
   id: serial("id").primaryKey(),
   endpoint: varchar("endpoint", { length: 500 }).notNull().unique(),
@@ -66,17 +74,25 @@ export type Reservation = typeof reservations.$inferSelect;
 export type InsertReservation = typeof reservations.$inferInsert;
 export type BlockedSlot = typeof blockedSlots.$inferSelect;
 export type InsertBlockedSlot = typeof blockedSlots.$inferInsert;
+export type ReleasedSlot = typeof releasedSlots.$inferSelect;
+export type InsertReleasedSlot = typeof releasedSlots.$inferInsert;
 export type PushSubscription = typeof pushSubscriptions.$inferSelect;
 export type InsertPushSubscription = typeof pushSubscriptions.$inferInsert;
 export type Feedback = typeof feedbacks.$inferSelect;
 export type InsertFeedback = typeof feedbacks.$inferInsert;
 
 export const serviceCatalog = [
-  { id: "loiros", category: "Cabelo", name: "Loiros", duration: 180, priceCents: 25000, description: "Venha clarear seu dia." },
-  { id: "moreno", category: "Cabelo", name: "Moreno iluminado", duration: 180, priceCents: 22000, description: "Luz, profundidade e naturalidade." },
-  { id: "selagem", category: "Tratamentos", name: "Selagem", duration: 150, priceCents: 15000, description: "Alinhamento, brilho e praticidade." },
-  { id: "argiloterapia", category: "Tratamentos", name: "Argiloterapia", duration: 60, priceCents: 9000, description: "Cuidado profundo para couro cabeludo e fios." },
-  { id: "cronograma", category: "Tratamentos", name: "Cronograma capilar", duration: 90, priceCents: 12000, description: "Hidratação, nutrição e reconstrução." },
+  { id: "corte", category: "Cabelo", name: "Corte", duration: 60, priceCents: 5000, description: "Um corte pensado para acompanhar seu estilo." },
+  { id: "cronograma-capilar", category: "Tratamentos", name: "Cronograma capilar", duration: 90, priceCents: 38700, description: "Hidratação, nutrição e reconstrução." },
+  { id: "hidratacao-escova", category: "Tratamentos", name: "Hidratação + escova", duration: 90, priceCents: 7500, description: "Cuidado, maciez e finalização com condição promocional." },
+  { id: "coloracao", category: "Coloração", name: "Coloração", duration: 150, priceCents: 12000, description: "Uma nova cor para valorizar sua beleza." },
+  { id: "moreno-iluminado", category: "Cabelo", name: "Moreno iluminado", duration: 240, priceCents: 35000, description: "Luz e profundidade para um resultado natural." },
+  { id: "loiro-iluminado", category: "Cabelo", name: "Loiro iluminado", duration: 240, priceCents: 42000, description: "Iluminação delicada e radiante." },
+  { id: "argiloterapia-capilar", category: "Tratamentos", name: "Argiloterapia", duration: 60, priceCents: 12000, description: "Cuidado profundo para couro cabeludo e fios." },
+  { id: "loiro", category: "Cabelo", name: "Loiro", duration: 240, priceCents: 45000, description: "Clareamento pensado para iluminar seu visual." },
+  { id: "botox-capilar", category: "Tratamentos", name: "Botox capilar", duration: 150, priceCents: 0, description: "Tratamento disponível com Bianca." },
+  { id: "selagem-organica", category: "Tratamentos", name: "Selagem orgânica", duration: 150, priceCents: 0, description: "Alinhamento, brilho e movimento." },
+  { id: "escova", category: "Cabelo", name: "Escova", duration: 60, priceCents: 0, description: "Finalização disponível com Bianca." },
 ] as const;
 
 export const professionals = [
